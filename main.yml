@@ -19,6 +19,9 @@
     - name: setup mysql server
       import_tasks: tasks/mysql.yml
 
+    - name: enable firewall
+      import_tasks: tasks/ufw.yml
+
   handlers:
     - name: Restart Apache
       service:
