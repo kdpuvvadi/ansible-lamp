@@ -17,7 +17,6 @@
     group: www-data
     mode: '0755'
 
-
 - name: Set up Apache virtualhost for {{ http_host }}
   template:
     src: "config/apache.conf.j2"
@@ -31,3 +30,8 @@
 - name: Disable default Apache site
   command: /usr/sbin/a2dissite 000-default.conf
   notify: Restart Apache
+
+- name: php info page
+  template:
+    src: "config/info.php.j2"
+    dest: "/var/www/{{ http_host }}/info.php"
