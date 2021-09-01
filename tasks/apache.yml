@@ -1,31 +1,33 @@
 ---
-- name: add git user
+
+- name: Create document directory for {{ http_host }}
+  file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: "{{ http_user }}"
+    group: www-data
+    mode: '0755'
+
+- name: add {{ http_user }} user
   user:
     name: "{{ http_user }}"
     shell: /bin/bash
     comment: "Apache User"
     home: /home/{{ http_user }}
     append: 'yes'
+    group: www-data
 
-- name: Create document root
-  file:
-    path: "/var/www/{{ http_host }}"
-    state: directory
-    owner: "{{ http_user }}"
-    mode: '0755'
 
-- name: Set up Apache virtualhost
+- name: Set up Apache virtualhost for {{ http_host }}
   template:
     src: "config/apache.conf.j2"
     dest: "/etc/apache2/sites-available/{{ http_conf }}"
   notify: Restart Apache
 
-- name: Enable new site
+- name: Enable new {{ http_host }}
   command: /usr/sbin/a2ensite {{ http_conf }}
   notify: Restart Apache
 
 - name: Disable default Apache site
   command: /usr/sbin/a2dissite 000-default.conf
-  when: disable_default
   notify: Restart Apache
-
