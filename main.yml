@@ -7,14 +7,20 @@
       include_vars: vars/defaults.yml
 
     - name: apt cache update & Upgrade
-      import_task: task/pre.yml
-  
+      import_tasks: tasks/pre.yml
+
+  tasks:
+    - name: install prereq packages
+      import_tasks: tasks/packages.yml
+
+    - name: setup apache2
+      import_tasks: tasks/apache.yml
+
   handlers:
     - name: Restart Apache
       service:
         name: apache2
         state: restarted
 
-  tasks:
-    - name: install prereq packages
-      import_task: task/packages.yml
+    - name: Reboot
+      Reboot:
