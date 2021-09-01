@@ -1,0 +1,20 @@
+---
+- hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Config
+      include_vars: vars/defaults.yml
+
+    - name: apt cache update & Upgrade
+      import_task: task/pre.yml
+  
+  handlers:
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted
+
+  tasks:
+    - name: install prereq packages
+      import_task: task/packages.yml

@@ -1,0 +1,31 @@
+---
+- name: add git user
+  user:
+    name: "{{ http_user }}"
+    shell: /bin/bash
+    comment: "Apache User"
+    home: /home/{{ http_user }}
+    append: 'yes'
+
+- name: Create document root
+  file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: "{{ http_user }}"
+    mode: '0755'
+
+- name: Set up Apache virtualhost
+  template:
+    src: "config/apache.conf.j2"
+    dest: "/etc/apache2/sites-available/{{ http_conf }}"
+  notify: Restart Apache
+
+- name: Enable new site
+  command: /usr/sbin/a2ensite {{ http_conf }}
+  notify: Restart Apache
+
+- name: Disable default Apache site
+  command: /usr/sbin/a2dissite 000-default.conf
+  when: disable_default
+  notify: Restart Apache
+
