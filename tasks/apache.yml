@@ -35,3 +35,8 @@
   template:
     src: "config/info.php.j2"
     dest: "/var/www/{{ http_host }}/info.php"
+  
+- name: simple html page
+  template:
+    src: "config/index.html.j2"
+    dest: "/var/www/{{ http_host }}/index.html"
