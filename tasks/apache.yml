@@ -1,5 +1,14 @@
 ---
 
+- name: add {{ http_user }} user
+  user:
+    name: "{{ http_user }}"
+    shell: /bin/bash
+    comment: "Apache User"
+    home: /home/{{ http_user }}
+    groups: www-data
+    append: 'yes'
+
 - name: Create document directory for {{ http_host }}
   file:
     path: "/var/www/{{ http_host }}"
@@ -7,15 +16,6 @@
     owner: "{{ http_user }}"
     group: www-data
     mode: '0755'
-
-- name: add {{ http_user }} user
-  user:
-    name: "{{ http_user }}"
-    shell: /bin/bash
-    comment: "Apache User"
-    home: /home/{{ http_user }}
-    append: 'yes'
-    group: www-data
 
 
 - name: Set up Apache virtualhost for {{ http_host }}
