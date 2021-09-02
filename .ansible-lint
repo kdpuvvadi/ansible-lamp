@@ -1,3 +1,4 @@
 # .ansible-lint
-skip_list:
-    - no-changed-when
+use_default_rules: true
+warn_list:
+  - experimental

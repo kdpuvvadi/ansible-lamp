@@ -27,10 +27,14 @@
 
 - name: Enable new {{ http_host }}
   command: /usr/sbin/a2ensite {{ http_conf }}
+  failed_when: false
+  changed_when: false
   notify: Restart Apache
 
 - name: Disable default Apache site
   command: /usr/sbin/a2dissite 000-default.conf
+  failed_when: false
+  changed_when: false
   notify: Restart Apache
 
 - name: php info page
