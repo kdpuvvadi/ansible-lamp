@@ -3,6 +3,8 @@
 
 Deploy LAMP stack on Debian System with ansible playbook
 
+![CI Status](https://github.com/kdpuvvadi/ansible-lamp-ubuntu/actions/workflows/lint.yml/badge.svg)
+
 ## Getting Started
 
 ### Inventory
