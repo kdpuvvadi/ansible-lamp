@@ -15,7 +15,7 @@
 
     - name: setup apache2
       import_tasks: tasks/apache.yml
-    
+
     - name: setup mysql server
       import_tasks: tasks/mysql.yml
 

@@ -1,4 +1,4 @@
---- 
+---
 
 - name: Allow SSH in the firewall
   ufw:
@@ -10,6 +10,3 @@
     rule: allow
     port: "{{ http_port }}"
     proto: tcp
-
-
-
