@@ -1,7 +1,7 @@
 
 # LAMP Stack deployment using ansible playbook
 
-Deploy LAMP stack on Debian System with ansible playbook
+Ansible playbook to deploy LAMP Stack(Linux,APache2,MySql, PHP) on a Debian based systems
 
 ![CI Status](https://github.com/kdpuvvadi/ansible-lamp-ubuntu/actions/workflows/lint.yml/badge.svg)
 
